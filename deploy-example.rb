@@ -37,6 +37,7 @@ server "8.8.8.8", :web, :app, :db, primary: true
 #
 set :stages, %w[staging workers production]
 set :default_stage, 'production'
+set :rails_env, default_stage
 require "capistrano/ext/multistage"
 # Application name - to conventionalize directory/project naming
 set :application, "my_application"

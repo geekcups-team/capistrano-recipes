@@ -5,12 +5,12 @@ namespace :nginx do
     run "#{sudo} apt-get -y update"
     run "#{sudo} apt-get -y install nginx"
   end
-  after "deploy:install", "nginx:install"
+  # after "deploy:install", "nginx:install"
 
   desc "Setup nginx configuration for this application"
   task :setup, roles: :web do
     template "nginx_unicorn.erb", "/tmp/nginx_conf"
-    run "#{sudo} mv /tmp/nginx_conf /etc/nginx/sites-enabled/#{application}"
+    run "#{sudo} mv /tmp/nginx_conf /etc/nginx/sites-enabled/#{application}_#{rails_env}"
     run "#{sudo} rm -f /etc/nginx/sites-enabled/default"
     restart
   end

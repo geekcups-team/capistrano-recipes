@@ -1,9 +1,9 @@
 set_default(:postgresql_host, "localhost")
-set_default(:postgresql_user) { application }
+set_default(:postgresql_user) { "#{application}_#{rails_env}" }
 set_default(:postgresql_password) { Capistrano::CLI.password_prompt "PostgreSQL Password: " }
-set_default(:postgresql_database) { "#{application}_production" }
+set_default(:postgresql_database) { "#{application}_#{rails_env}" }
 set_default(:postgresql_dump_path) { "#{current_path}/tmp" }
-set_default(:postgresql_dump_file) { "#{application}_dump.sql" }
+set_default(:postgresql_dump_file) { "#{application}_#{rails_env}_dump.sql" }
 set_default(:postgresql_local_dump_path) { File.expand_path("../../../tmp", __FILE__) }
 set_default(:postgresql_pid) { "/var/run/postgresql/9.1-main.pid" }
 

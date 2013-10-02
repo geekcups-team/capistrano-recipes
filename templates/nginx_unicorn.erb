@@ -6,11 +6,11 @@ server {
   server_name localhost playout.sfe.tv mvp.local;
   listen 443;
   root <%= current_path %>/public;
-  error_log /var/log/nginx/<%= application %>.error.log;
+  error_log /var/log/nginx/<%= "#{application}_#{rails_env}" %>.error.log;
 
-  ssl_certificate      <%= shared_path %>/certs/playout.sfe.tv.cert;
-  ssl_certificate_key  <%= shared_path %>/certs/playout.sfe.tv.key;
-  ssl on;
+#  ssl_certificate      <%= shared_path %>/certs/playout.sfe.tv.cert;
+#  ssl_certificate_key  <%= shared_path %>/certs/playout.sfe.tv.key;
+#  ssl on;
   error_page 500 502 503 504 /500.html;
   client_max_body_size 4G;
   keepalive_timeout 10;
