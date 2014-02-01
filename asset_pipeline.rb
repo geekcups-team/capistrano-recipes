@@ -13,7 +13,7 @@ namespace :assets do
   task :rsync, role: :app  do
     puts "Rsyncing assets"
     hostname = find_servers_for_task(current_task).first
-    system "rsync -arvz #{File.expand_path("../../../public/assets/", __FILE__)} #{hostname}:#{current_path}/public"
+    system "rsync -arvz #{File.expand_path("../../../public/assets/", __FILE__)} #{user}@#{hostname}:#{current_path}/public"
     puts "Rsync complete"
   end
 

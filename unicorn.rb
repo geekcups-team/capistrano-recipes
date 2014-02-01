@@ -11,15 +11,16 @@ namespace :unicorn do
     template "unicorn.rb.erb", unicorn_config
     template "unicorn_init.erb", "/tmp/unicorn_init"
     run "chmod +x /tmp/unicorn_init"
-    run "#{sudo} mv /tmp/unicorn_init /etc/init.d/unicorn_#{application}"
-    run "#{sudo} update-rc.d -f unicorn_#{application} defaults"
+    run "#{sudo} mv /tmp/unicorn_init /etc/init.d/unicorn_#{application}_#{rails_env}"
+    run "#{sudo} update-rc.d -f unicorn_#{application}_#{rails_env} defaults"
   end
   after "deploy:setup", "unicorn:setup"
 
   %w[start stop].each do |command|
     desc "#{command} unicorn"
     task command, roles: :app do
-      run "service unicorn_#{application} #{command}"
+      # run "service unicorn_#{application} #{command}"
+      run " /etc/init.d/unicorn_#{application}_#{rails_env} #{command}"
     end
     after "deploy:#{command}", "unicorn:#{command}"
   end

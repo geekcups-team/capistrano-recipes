@@ -1,4 +1,4 @@
-upstream unicorn_<%= application %> {
+upstream unicorn_<%= "#{application}_#{rails_env}" %> {
   server unix:/tmp/unicorn.<%= application %>.sock fail_timeout=0;
 }
 
